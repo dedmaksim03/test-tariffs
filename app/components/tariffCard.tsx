@@ -28,9 +28,8 @@ export function TariffCard({
   }: TariffCardProps) {
   return (
     <div className= {cn(
-        `m-1 cursor-pointer flex justify-center relative bg-(--card) border-2 ${backlit ? "border-(--card-border-backlit)" : "border-(--card-border)"}
-          ${isSelected && "shadow-[0_0_12px_rgba(184,184,184,0.4)]"}
-          ${isWide ? "rounded-4xl" : "rounded-[15%]"}`,
+        `m-1 cursor-pointer flex justify-center relative bg-(--card) border-2 rounded-4xl ${backlit ? "border-(--card-border-backlit)" : "border-(--card-border)"}
+          ${isSelected && "shadow-[0_0_12px_rgba(184,184,184,0.4)]"}`,
         className
       )}
       onClick={onSelect}>
