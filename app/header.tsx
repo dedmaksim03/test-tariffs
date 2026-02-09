@@ -14,8 +14,8 @@ export default function Header() {
     };
 
     return (
-        <div className="h-23 bg-(--header) shrink-0 flex flex-col items-center justify-center">
-            <p className="text-xl font-bold">Успейте открыть пробную неделю</p>
+        <div className="h-23 p-2 bg-(--header) shrink-0 flex flex-col items-center justify-center">
+            <p className="text-base sm:text-xl font-bold">Успейте открыть пробную неделю</p>
             <div className="flex gap-1">
                 <Image
                         src="/star.svg"
