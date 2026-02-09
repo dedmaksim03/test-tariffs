@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #171717;
+  --foreground: #ffffff;
+  --brand-300: #1D5B43;
+  --brand-500: #81FE95;
+
+  --accent-300: #FD5656;
+
+  --secondary-300: #FDB056; 
+  --secondary-500: #ffca8e; 
+
+  --neutral-100: #232829;
+  --neutral-300: #313637;
+  --neutral-500: #484D4E;
+
+  --header: var(--brand-300);
+  --base-background: var(--neutral-100);
+
+  --card: var(--neutral-300);
+  --card-border: var(--neutral-500);
+  --card-border-backlit: var(--secondary-300);
+  --card-discount: var(--accent-300); 
+
+  --footer-border: var(--brand-500); 
+  --footer-text: var(--brand-500); 
+
+  --buy-button: var(--secondary-300);
+  --buy-button-hover: var(--secondary-500); 
+
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  font-size: 16px;  
+} 
+
+body {
+  background: var(--background);
+  color: var(--foreground); 
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif; 
+}
