@@ -1,4 +1,4 @@
-import { Tariff } from "./types/Tariff";
+import { Tariff } from "./types/tariff";
 import PageClient from "./pageClient";
 
 async function getTariffs(): Promise<Tariff[]> {

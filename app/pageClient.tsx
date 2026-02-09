@@ -1,16 +1,21 @@
 "use client"
 
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+
 import Image from "next/image";
 import { Button } from 'antd';
 import { TariffCard } from "./components/tariffCard";
 import { useState } from "react";
-import { Tariff } from "./types/Tariff";
+import { Tariff } from "./types/tariff";
 
 type Props = {
   tariffs: Tariff[];
 };
 
 export default function PageClient({ tariffs }: Props) {
+
+  const discountActive = useSelector((state: RootState) => state.discount.active);
 
   let [agree, setAgree] = useState(false)
   let [selectedCard, setSelectedCard] = useState<null | string>(null)
@@ -52,29 +57,30 @@ export default function PageClient({ tariffs }: Props) {
                     backlit
                     title={bestTariff.period}
                     price={bestTariff.price.toString()}
-                    oldPrice={bestTariff.full_price.toString()}
+                    oldPrice={discountActive ? bestTariff.full_price.toString() : undefined}
                     message={bestTariff.text}
-                    discount={`-${Math.round(
+                    discount={discountActive ? `-${Math.round(
                         (1 - bestTariff.price / bestTariff.full_price) * 100
-                    )}%`}
+                    )}%`: undefined}
                     onSelect={() => onSetSelectedCard(bestTariff.id)}
                     isSelected={selectedCard === bestTariff.id}
+                    isWide={true}
                     />
                 </div>
             )}
 
-            <div className="flex h-55 gap-1">
+            <div className="flex h-55 gap-2">
                 {otherTariffs.map((tariff, index) => (
                     <div key={`${tariff.id}-${index}`} className="flex-1 h-full"> 
                     <TariffCard
                         className="h-full"
                         title={tariff.period}
                         price={tariff.price.toString()}
-                        oldPrice={tariff.full_price.toString()}
+                        oldPrice={discountActive ? tariff.full_price.toString() : undefined}
                         message={tariff.text}
-                        discount={`-${Math.round(
+                        discount={discountActive ? `-${Math.round(
                         (1 - tariff.price / tariff.full_price) * 100
-                        )}%`}
+                        )}%` : undefined}
                         onSelect={() => onSetSelectedCard(tariff.id)}
                         isSelected={selectedCard === tariff.id}
                     />

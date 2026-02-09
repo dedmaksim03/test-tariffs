@@ -10,6 +10,7 @@ interface TariffCardProps {
   backlit?: boolean
   onSelect?: () => void
   isSelected?:boolean
+  isWide?: boolean
   className?: string
 }
 
@@ -22,17 +23,19 @@ export function TariffCard({
     backlit,
     onSelect,
     isSelected,
+    isWide,
     className
   }: TariffCardProps) {
   return (
     <div className= {cn(
-        `m-1 cursor-pointer flex justify-center relative bg-(--card) border-2 rounded-4xl ${backlit ? "border-(--card-border-backlit)" : "border-(--card-border)"}
-          ${isSelected && "shadow-[0_0_12px_rgba(184,184,184,0.4)]"}`,
+        `m-1 cursor-pointer flex justify-center relative bg-(--card) border-2 ${backlit ? "border-(--card-border-backlit)" : "border-(--card-border)"}
+          ${isSelected && "shadow-[0_0_12px_rgba(184,184,184,0.4)]"}
+          ${isWide ? "rounded-4xl" : "rounded-[15%]"}`,
         className
       )}
       onClick={onSelect}>
       {discount && (<div className="absolute left-7 rounded-b-lg p-1 text-xs bg-(--card-discount)">{discount}</div>)}
-      <div className="mt-6 mb-3 flex gap-8 justify-center flex-wrap items-center w-8/10">
+      <div className={cn("flex gap-8 justify-center flex-wrap items-center w-8/10", isWide ? "mt-4 mb-3" : "mt-7 mb-2")}>
         <div className="flex flex-col items-center justify-center">
           <p className="text-xxl mb-3">{title}</p>
           <p className="text-xl xl:text-4xl 2xl:text-5xl text-(--secondary-300) text-nowrap relative">{price} ₽</p>

@@ -1,6 +1,18 @@
+"use client";
+
+import { useDispatch } from "react-redux";
+import { setDiscountActive } from "./store/discountSlice";
+
 import Image from "next/image";
+import Timer from "./components/timer";
 
 export default function Header() {
+    const dispatch = useDispatch();
+
+    const handleTimerEnd = () => {
+        dispatch(setDiscountActive(false));
+    };
+
     return (
         <div className="h-23 bg-(--header) shrink-0 flex flex-col items-center justify-center">
             <p className="text-xl font-bold">Успейте открыть пробную неделю</p>
@@ -11,7 +23,7 @@ export default function Header() {
                         width={10}
                         height={10}
                     /> 
-                <p className="text-2xl font-bold text-(--secondary-300)">15:59</p>
+                <Timer initialMinutes={2} initialSeconds={0} warningSeconds={30} onEnd={handleTimerEnd}/>
                 <Image
                         src="/star.svg"
                         alt="star image right"

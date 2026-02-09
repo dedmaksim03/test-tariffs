@@ -3,6 +3,8 @@ import { Montserrat } from "next/font/google";
 import Header from "./header";
 import "./globals.css";
 
+import { ReduxProvider } from "./providers";
+
 export const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
@@ -24,8 +26,10 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} antialiased h-dvh flex flex-col`} 
       >
-        <Header/>
-        {children}
+        <ReduxProvider>
+          <Header/>
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );
