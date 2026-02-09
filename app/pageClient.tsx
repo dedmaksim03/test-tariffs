@@ -18,15 +18,21 @@ export default function PageClient({ tariffs }: Props) {
   const discountActive = useSelector((state: RootState) => state.discount.active);
 
   let [agree, setAgree] = useState(false)
+  let [buttonClickWithoutAgree, setButtonClickWithoutAgree] = useState(false)
   let [selectedCard, setSelectedCard] = useState<null | string>(null)
 
   let onSetAgree = () => {
     setAgree(!agree)
+    if (buttonClickWithoutAgree) setButtonClickWithoutAgree(false)
   }
 
   let onSetSelectedCard = (id: string) => {
     console.log(id)
     setSelectedCard(id)
+  }
+
+  let handleButtonClick = () => {
+    if (!agree) setButtonClickWithoutAgree(true)
   }
 
   const sortedTariffs = [...tariffs].sort(
@@ -97,7 +103,7 @@ export default function PageClient({ tariffs }: Props) {
                 />        
               Следуя плану на 3 месяца и более, люди получают в 2 раза лучший результат, чем за 1 месяц
             </div>
-            <div className="flex gap-2 items-center text-xs rounded-2xl w-full sm:w-9/10 mt-2">
+            <div className={`flex gap-2 items-center text-xs w-full sm:w-9/10 mt-2 p-1 border border-(--neutral-100) rounded-md ${buttonClickWithoutAgree && "!border-(--accent-300)"}`}>
                 <button className="h-5 w-5 border border-(--neutral-500) shrink-0 relative cursor-pointer" onClick={onSetAgree}> 
                   {agree && <Image 
                     src="/arrow.svg"
@@ -120,6 +126,7 @@ export default function PageClient({ tariffs }: Props) {
                 sm:text-base !text-xl
                 my-1
               "
+              onClick={handleButtonClick}
             >
               Купить
             </Button>
